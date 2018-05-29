@@ -1,0 +1,48 @@
+void addNumber(Node * & head)
+{
+    int number;
+
+    struct Node * cur;
+    struct Node * prev;
+
+    Node * newNode = new Node;
+
+    goback:
+    cout << "Enter a number: ";
+    cin >> number;
+
+    newNode -> num = number;
+    newNode -> next = NULL;
+
+    if (head == NULL)
+	{
+        head = newNode;
+        return;
+    }
+
+    for (prev = NULL, cur = head; cur != NULL; prev = cur, cur = cur -> next)
+    {
+        if (newNode -> num == cur -> num)
+        {
+            cout << "Number already exists, enter new number" << endl;
+            goto goback;
+        }
+    }
+
+    for (prev = NULL, cur = head; cur != NULL; prev = cur, cur = cur -> next)
+    {
+        if (newNode -> num < cur -> num)
+            break;
+    }
+
+    if (prev == NULL)
+    {
+        newNode -> next = head;
+        head = newNode;
+    }
+    else
+	{
+		newNode -> next = prev -> next;
+		prev -> next = newNode;
+    }
+}
